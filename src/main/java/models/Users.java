@@ -7,9 +7,9 @@ public class Users {
     private String name;
     private String email;
     private String phone;
-    private String idNumber;
+    private int idNumber;
 
-    public Users(String name, String email, String phone, String idNumber) {
+    public Users(String name, String email, String phone, int idNumber) {
         this.name = name;
         this.email = email;
         this.phone = phone;
@@ -48,11 +48,11 @@ public class Users {
         this.phone = phone;
     }
 
-    public String getIdNumber() {
+    public int getIdNumber() {
         return idNumber;
     }
 
-    public void setIdNumber(String idNumber) {
+    public void setIdNumber(int idNumber) {
         this.idNumber = idNumber;
     }
 
