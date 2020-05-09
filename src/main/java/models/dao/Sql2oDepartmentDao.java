@@ -80,7 +80,7 @@ public class Sql2oDepartmentDao implements DepartmentDao {
 
     @Override
     public void update(int id, String newName, String newFloor) {
-        String updateDepartment="UPDATE department SET (name,floor) = (:name, :floor) WHERE id=:id";
+        String updateDepartment="UPDATE department SET name=:name,floor=:floor WHERE id=:id";
         try(Connection conn = sql2o.open()) {
             conn.createQuery(updateDepartment)
                     .addParameter("name",newName)
