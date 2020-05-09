@@ -11,13 +11,9 @@ private int userId;
 private String userRole;
 private String userPosition;
 
-    public Department(String name, String floor, int newsId, int userId, String userRole, String userPosition) {
+    public Department(String name, String floor) {
         this.name = name;
         this.floor = floor;
-        this.newsId=newsId;
-        this.userId=userId;
-        this.userRole=userRole;
-        this.userPosition=userPosition;
     }
 
     public int getId() {
