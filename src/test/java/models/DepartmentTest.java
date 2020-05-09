@@ -29,6 +29,30 @@ public class DepartmentTest {
     }
 
     @Test
+    public void getNewsId_returnsCorrectNewsId()throws Exception {
+        Department testDepartment=createDepartment();
+        assertEquals(2,testDepartment.getNewsId());
+    }
+
+    @Test
+    public void getUserId_returnsCorrectUserId()throws Exception {
+        Department testDepartment=createDepartment();
+        assertEquals(1,testDepartment.getUserId());
+    }
+
+    @Test
+    public void getRole_returnsCorrectRole()throws Exception {
+        Department testDepartment=createDepartment();
+        assertEquals("Receive Calls",testDepartment.getUserRole());
+    }
+
+    @Test
+    public void getPosition_returnsCorrectPosition()throws Exception {
+        Department testDepartment=createDepartment();
+        assertEquals("Secretary",testDepartment.getUserPosition());
+    }
+
+    @Test
     public void SetName_setsCorrectName()throws Exception {
         Department testDepartment=createDepartment();
         testDepartment.setName("News");
@@ -42,9 +66,37 @@ public class DepartmentTest {
         assertNotEquals("Third Floor",testDepartment.getFloor());
     }
 
-    //    HELPERS
+    @Test
+    public void SetNewsId_setsCorrectNewsId()throws Exception {
+        Department testDepartment=createDepartment();
+        testDepartment.setNewsId(3);
+        assertNotEquals(2,testDepartment.getNewsId());
+    }
+
+    @Test
+    public void SetUserId_setsCorrectUserId()throws Exception {
+        Department testDepartment=createDepartment();
+        testDepartment.setUserId(2);
+        assertNotEquals(1,testDepartment.getUserId());
+    }
+
+    @Test
+    public void SetRole_setsCorrectRole()throws Exception {
+        Department testDepartment=createDepartment();
+        testDepartment.setUserRole("Update Boss");
+        assertNotEquals("Receive Calls",testDepartment.getUserRole());
+    }
+
+    @Test
+    public void SetPosition_setsCorrectPosition()throws Exception {
+        Department testDepartment=createDepartment();
+        testDepartment.setUserPosition("Boss");
+        assertNotEquals("Secretary",testDepartment.getUserPosition());
+    }
+
+    //    HELPERSgetNewsId
     public Department createDepartment()
     {
-        return new Department("Raw News","Third Floor");
+        return new Department("Raw News","Third Floor",2,1,"Receive Calls","Secretary");
     }
 }
