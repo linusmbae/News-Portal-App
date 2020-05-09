@@ -29,30 +29,6 @@ public class DepartmentTest {
     }
 
     @Test
-    public void getNewsId_returnsCorrectNewsId()throws Exception {
-        Department testDepartment=createDepartment();
-        assertEquals(2,testDepartment.getNewsId());
-    }
-
-    @Test
-    public void getUserId_returnsCorrectUserId()throws Exception {
-        Department testDepartment=createDepartment();
-        assertEquals(1,testDepartment.getUserId());
-    }
-
-    @Test
-    public void getRole_returnsCorrectRole()throws Exception {
-        Department testDepartment=createDepartment();
-        assertEquals("Receive Calls",testDepartment.getUserRole());
-    }
-
-    @Test
-    public void getPosition_returnsCorrectPosition()throws Exception {
-        Department testDepartment=createDepartment();
-        assertEquals("Secretary",testDepartment.getUserPosition());
-    }
-
-    @Test
     public void SetName_setsCorrectName()throws Exception {
         Department testDepartment=createDepartment();
         testDepartment.setName("News");
@@ -97,6 +73,6 @@ public class DepartmentTest {
     //    HELPERSgetNewsId
     public Department createDepartment()
     {
-        return new Department("Raw News","Third Floor",2,1,"Receive Calls","Secretary");
+        return new Department("Raw News","Third Floor");
     }
 }

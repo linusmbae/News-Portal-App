@@ -50,14 +50,14 @@ public class Sql2oUserDaoTest {
         assertEquals(2,userDao.getAll().size());
     }
 
-//    @Test
-//    public void getById_ReturnsUserById()throws Exception {
-//        Users testUser=createUser();
-//        userDao.save(testUser);
-//        Users testSecondUser=createUser();
-//        userDao.save(testSecondUser);
-//        assertTrue(userDao.findById(testSecondUser.getId()).equals(testSecondUser.getId()));
-//    }
+    @Test
+    public void getById_ReturnsUserById()throws Exception {
+        Users testUser=createUser();
+        userDao.save(testUser);
+        Users testSecondUser=createUser();
+        userDao.save(testSecondUser);
+        assertTrue(userDao.findById(testSecondUser.getId()).equals(testSecondUser));
+    }
 
 
     @Test
