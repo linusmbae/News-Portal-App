@@ -14,7 +14,9 @@ public interface DepartmentDao {
 //    READ
     List<Department> getAll();
     Department findById(int id);
-    List<Users> findUersInDepartment(int userId);
+
+    List<Department>getAllUsersInDepartment();
+    Users findUsersInDepartment(int userId);
 
 //    UPDATE
     void update(int id,String name, String floor);
