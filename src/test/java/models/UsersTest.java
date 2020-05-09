@@ -40,6 +40,34 @@ public class UsersTest {
         assertEquals(12345,testUser.getIdNumber());
     }
 
+    @Test
+    public void setName_setsCorrectName()throws Exception {
+        Users testUser=createUser();
+        testUser.setName("Lucy");
+        assertNotEquals("Linus",testUser.getName());
+    }
+
+    @Test
+    public void setEmail_setsCorrectEmail()throws Exception {
+        Users testUser=createUser();
+        testUser.setEmail("lucy@gmail.com");
+        assertNotEquals("linus@gmail.com",testUser.getEmail());
+    }
+
+    @Test
+    public void setPhone_setsCorrectPhone()throws Exception {
+        Users testUser=createUser();
+        testUser.setPhone("0712345678");
+        assertNotEquals("0714719935",testUser.getPhone());
+    }
+
+    @Test
+    public void setIdNumber_setsCorrectIdNumber()throws Exception {
+        Users testUser=createUser();
+        testUser.setIdNumber(54321);
+        assertNotEquals(12345,testUser.getIdNumber());
+    }
+
     //    HELPERS
     public Users createUser()
     {
