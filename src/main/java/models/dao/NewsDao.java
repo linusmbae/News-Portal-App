@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface NewsDao {
 //    CREATE
+    void saveNews(News news);
     void saveDepartmentNews(DepartmentNews departmentNews);
     void saveGeneralNews(GeneralNews generalNews);
 
@@ -22,6 +23,6 @@ public interface NewsDao {
 
 //    DELETE
     void clearAll();
-    void removeById(int id);
+    void removeById(int id,int department_id);
 
 }
