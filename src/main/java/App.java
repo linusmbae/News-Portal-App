@@ -1,4 +1,5 @@
 import com.google.gson.Gson;
+import exceptions.ApiException;
 import models.Department;
 import models.DepartmentNews;
 import models.GeneralNews;
@@ -7,6 +8,10 @@ import models.dao.Sql2oDepartmentDao;
 import models.dao.Sql2oNewsDao;
 import models.dao.Sql2oUserDao;
 import org.sql2o.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import static spark.Spark.*;
 public class App {
     public static void main(String[] args) {
@@ -42,7 +47,7 @@ public class App {
                 return gson.toJson(userDao.getAll());
             }else
             {
-                return "{\\\"message\\\":\\\"I'm sorry, but no users are currently listed in the database.\\\"}";
+                throw new ApiException(404,String.format("No users in the database"));
             }
         });
 
@@ -55,7 +60,7 @@ public class App {
                return gson.toJson(findUser);
            }else
            {
-               return "{\\\"message\\\":\\\"I'm sorry, but no users are currently listed in the database.\\\"}";
+               throw new ApiException(404,String.format("No users with id: \"%s\"in the database",request.params("id")));
            }
         });
 
@@ -103,7 +108,7 @@ public class App {
                 return gson.toJson(departmentDao.getAll());
             }else
             {
-                return "{\\\"message\\\":\\\"I'm sorry, but no departments are currently listed in the database.\\\"}";
+                throw new ApiException(404,String.format("No Departments in the database"));
             }
         });
 
@@ -116,8 +121,7 @@ public class App {
                 return gson.toJson(findDepartment);
             }else
             {
-                return "{\\\"message\\\":\\\"I'm sorry, but no departments are currently listed in the database.\\\"}";
-            }
+                throw new ApiException(404,String.format("No department with id: \"%s\" in the database",request.params("id")));            }
         });
 
         post("/departments/:id/remove","application/json",(request, response) ->
@@ -141,7 +145,7 @@ public class App {
                 return gson.toJson(departmentDao.getAll());
             }else
             {
-                return "{\\\"message\\\":\\\"I'm sorry, but no departments are currently listed in the database.\\\"}";
+                throw new ApiException(404,String.format("No Departments in the database"));
             }
         });
 
@@ -162,7 +166,7 @@ public class App {
                 return gson.toJson(newsDao.getAllGeneralNews());
             }else
             {
-                return "{\\\"message\\\":\\\"I'm sorry, but no news are currently listed in the database.\\\"}";
+                throw new ApiException(404,String.format("No news in the database"));
 
             }
         });
@@ -177,7 +181,7 @@ public class App {
                 return gson.toJson(newsDao.getAllGeneralNews());
             }else
             {
-                return "{\\\"message\\\":\\\"I'm sorry, but no news are currently listed in the database.\\\"}";
+                throw new ApiException(404,String.format("No news in the database"));
             }
         });
 
@@ -199,7 +203,7 @@ public class App {
                 return gson.toJson(newsDao.getAllDepartmentNews());
             }else
             {
-                return "{\\\"message\\\":\\\"I'm sorry, but no news are currently listed in the database.\\\"}";
+                throw new ApiException(404,String.format("No news in the database"));
             }
         });
         post("/news.department-news/clear","application/json",(request, response) ->
@@ -211,10 +215,21 @@ public class App {
                 return gson.toJson(newsDao.getAllDepartmentNews());
             }else
             {
-                return "{\\\"message\\\":\\\"database cleared\\\"}";
+                throw new ApiException(404,String.format("Database Cleared"));
+
             }
         });
 //        FILTERS
+        exception(ApiException.class, (exception, request, response) -> {
+            ApiException err = exception;
+            Map<String, Object> jsonMap = new HashMap<>();
+            jsonMap.put("status", err.getStatusCode());
+            jsonMap.put("errorMessage", err.getMessage());
+            response.type("application/json");
+            response.status(err.getStatusCode());
+            response.body(gson.toJson(jsonMap));
+        });
+
         after((req, res) ->{
             res.type("application/json");
         });
