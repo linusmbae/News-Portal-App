@@ -42,33 +42,7 @@ public class DepartmentTest {
         assertNotEquals("Third Floor",testDepartment.getFloor());
     }
 
-    @Test
-    public void SetNewsId_setsCorrectNewsId()throws Exception {
-        Department testDepartment=createDepartment();
-        testDepartment.setNewsId(3);
-        assertNotEquals(2,testDepartment.getNewsId());
-    }
 
-    @Test
-    public void SetUserId_setsCorrectUserId()throws Exception {
-        Department testDepartment=createDepartment();
-        testDepartment.setUserId(2);
-        assertNotEquals(1,testDepartment.getUserId());
-    }
-
-    @Test
-    public void SetRole_setsCorrectRole()throws Exception {
-        Department testDepartment=createDepartment();
-        testDepartment.setUserRole("Update Boss");
-        assertNotEquals("Receive Calls",testDepartment.getUserRole());
-    }
-
-    @Test
-    public void SetPosition_setsCorrectPosition()throws Exception {
-        Department testDepartment=createDepartment();
-        testDepartment.setUserPosition("Boss");
-        assertNotEquals("Secretary",testDepartment.getUserPosition());
-    }
 
     //    HELPERSgetNewsId
     public Department createDepartment()
