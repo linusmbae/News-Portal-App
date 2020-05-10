@@ -14,6 +14,13 @@ import java.util.Map;
 
 import static spark.Spark.*;
 public class App {
+    static int getHerokuAssignedPort() {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT") != null) {
+            return Integer.parseInt(processBuilder.environment().get("PORT"));
+        }
+        return 4567;
+    }
     public static void main(String[] args) {
         Sql2oDepartmentDao departmentDao;
         Sql2oNewsDao newsDao;
@@ -21,10 +28,12 @@ public class App {
         Connection conn;
         Gson gson=new Gson();
 
+        port(getHerokuAssignedPort());
         staticFileLocation("/public");
-
-        String connectionString = "jdbc:postgresql://localhost:5432/news_portal_database";
-        Sql2o sql2o = new Sql2o(connectionString, "linus", "mariano@9496");
+        String connectionString = "jdbc:postgresql://ec2-52-71-55-81.compute-1.amazonaws.com:5432/d6bmaokk1u9eh9";
+        Sql2o sql2o = new Sql2o(connectionString, "qkwlpyyyyqwnbj", "5401143946420eed883b2ccf73c51f32bbf7b81b14c61eaad00d250f017c9db7");
+//        String connectionString = "jdbc:postgresql://localhost:5432/news_portal_database";
+//        Sql2o sql2o = new Sql2o(connectionString, "linus", "mariano@9496");
         departmentDao=new Sql2oDepartmentDao(sql2o);
         newsDao=new Sql2oNewsDao(sql2o);
         userDao=new Sql2oUserDao(sql2o);
