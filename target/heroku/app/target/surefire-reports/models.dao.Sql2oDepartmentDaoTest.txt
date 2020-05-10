@@ -1,0 +1,14 @@
+-------------------------------------------------------------------------------
+Test set: models.dao.Sql2oDepartmentDaoTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.593 sec <<< FAILURE! - in models.dao.Sql2oDepartmentDaoTest
+models.dao.Sql2oDepartmentDaoTest  Time elapsed: 0.593 sec  <<< ERROR!
+org.sql2o.Sql2oException: Could not acquire a connection from DataSource - FATAL: no pg_hba.conf entry for host "41.84.152.6", user "rbwqysqbdiaqms", database "d9stjanqk4t4gk", SSL off
+	at models.dao.Sql2oDepartmentDaoTest.setUp(Sql2oDepartmentDaoTest.java:29)
+Caused by: org.postgresql.util.PSQLException: FATAL: no pg_hba.conf entry for host "41.84.152.6", user "rbwqysqbdiaqms", database "d9stjanqk4t4gk", SSL off
+	at models.dao.Sql2oDepartmentDaoTest.setUp(Sql2oDepartmentDaoTest.java:29)
+
+models.dao.Sql2oDepartmentDaoTest  Time elapsed: 0.593 sec  <<< ERROR!
+java.lang.NullPointerException
+	at models.dao.Sql2oDepartmentDaoTest.shutDown(Sql2oDepartmentDaoTest.java:42)
+

@@ -53,7 +53,7 @@ make necessary changes to the database links in the test files
 >>  Sql2o sql2o = new Sql2o(connectionString, "user", "pass");
 
  ## Live Link
- [Live Link]()
+ [Live Link](https://news-portal-app-api.herokuapp.com/)
  
 ## Reach me
 [Email](linusmutugi5178@gmail.com) 
