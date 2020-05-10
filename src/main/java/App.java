@@ -1,5 +1,6 @@
 import com.google.gson.Gson;
 import models.Department;
+import models.DepartmentNews;
 import models.GeneralNews;
 import models.Users;
 import models.dao.Sql2oDepartmentDao;
@@ -195,6 +196,39 @@ public class App {
             }else
             {
                 return "{\\\"message\\\":\\\"I'm sorry, but no news are currently listed in the database.\\\"}";
+            }
+        });
+
+//        DEPARTMENT NEWS
+        post("/news/department-news/new","application/json",(request, response) ->
+        {
+            DepartmentNews departmentNews=gson.fromJson(request.body(),DepartmentNews.class);
+            newsDao.saveDepartmentNews(departmentNews);
+            response.status(201);
+            return gson.toJson(departmentNews);
+        });
+
+        get("/news/department-news","application/json",(request, response) ->
+        {
+            System.out.println(newsDao.getAllDepartmentNews());
+            if (newsDao.getAllDepartmentNews().size()>0)
+            {
+                return gson.toJson(newsDao.getAllDepartmentNews());
+            }else
+            {
+                return "{\\\"message\\\":\\\"I'm sorry, but no news are currently listed in the database.\\\"}";
+            }
+        });
+        post("/news.department-news/clear","application/json",(request, response) ->
+        {
+            System.out.println(newsDao.getAllDepartmentNews());
+            if (newsDao.getAllDepartmentNews().size()>0)
+            {
+                newsDao.clearAll();
+                return gson.toJson(newsDao.getAllDepartmentNews());
+            }else
+            {
+                return "{\\\"message\\\":\\\"database cleared\\\"}";
             }
         });
 //        FILTERS
