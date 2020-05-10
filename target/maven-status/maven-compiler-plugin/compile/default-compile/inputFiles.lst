@@ -1,0 +1,13 @@
+/home/linus/Desktop/News-Portal-App/src/main/java/models/GeneralNews.java
+/home/linus/Desktop/News-Portal-App/src/main/java/models/News.java
+/home/linus/Desktop/News-Portal-App/src/main/java/models/dao/Sql2oDepartmentDao.java
+/home/linus/Desktop/News-Portal-App/src/main/java/App.java
+/home/linus/Desktop/News-Portal-App/src/main/java/models/dao/DepartmentDao.java
+/home/linus/Desktop/News-Portal-App/src/main/java/models/Department.java
+/home/linus/Desktop/News-Portal-App/src/main/java/models/dao/NewsDao.java
+/home/linus/Desktop/News-Portal-App/src/main/java/models/DepartmentNews.java
+/home/linus/Desktop/News-Portal-App/src/main/java/models/dao/UserDao.java
+/home/linus/Desktop/News-Portal-App/src/main/java/models/Users.java
+/home/linus/Desktop/News-Portal-App/src/main/java/models/dao/Sql2oUserDao.java
+/home/linus/Desktop/News-Portal-App/src/main/java/exceptions/ApiException.java
+/home/linus/Desktop/News-Portal-App/src/main/java/models/dao/Sql2oNewsDao.java
