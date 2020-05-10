@@ -7,4 +7,5 @@ public class DepartmentNews extends News {
         this.content=content;
         this.type=TYPE;
     }
+
 }
