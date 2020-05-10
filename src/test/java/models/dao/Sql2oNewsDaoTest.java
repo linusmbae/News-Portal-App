@@ -19,7 +19,7 @@ public class Sql2oNewsDaoTest {
     @BeforeClass
     public static void setUp() throws Exception {
         String connectionString = "jdbc:postgresql://localhost:5432/news_portal_database_test";
-        Sql2o sql2o = new Sql2o(connectionString, "postgres", "12345");
+        Sql2o sql2o = new Sql2o(connectionString, "linus", "mariano@9496");
         System.out.println("Connection Initialized");
         newsDao=new Sql2oNewsDao(sql2o);
         departmentDao=new Sql2oDepartmentDao(sql2o);
