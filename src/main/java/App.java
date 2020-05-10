@@ -120,19 +120,6 @@ public class App {
             }
         });
 
-//        post("department/:id/update","application.json",(request, response) ->
-//        {
-//            int departmentId=Integer.parseInt(request.params("id"));
-//            Department findDepartment=departmentDao.findById(departmentId);
-//
-//
-//            if (findDepartment!=null)
-//            {
-//                departmentDao.update();
-//
-//            }
-//        });
-
         post("/departments/:id/remove","application/json",(request, response) ->
         {
             System.out.println(departmentDao.getAll());
@@ -180,11 +167,6 @@ public class App {
             }
         });
 
-//        get("/news/general-news/:id","application.json",(request, response) ->
-//        {
-//            int newsId=Integer.parseInt(request.params("id"));
-//            GeneralNews generalNews=newsDao.getGeneralNews(newsId);
-//        });
 
         post("/news/general-news/clear","application/json",(request, response) ->
         {
@@ -202,6 +184,7 @@ public class App {
 //        DEPARTMENT NEWS
         post("/news/department-news/new","application/json",(request, response) ->
         {
+
             DepartmentNews departmentNews=gson.fromJson(request.body(),DepartmentNews.class);
             newsDao.saveDepartmentNews(departmentNews);
             response.status(201);
