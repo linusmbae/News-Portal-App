@@ -14,28 +14,13 @@ public class Sql2oNewsDao implements NewsDao{
         this.sql2o = sql2o;
     }
 
-//    @Override
-//    public void saveNews(News news) {
-//        String saveDepartmentNews="INSERT INTO news (content,type)VALUES(:content,:type)";
-//        try(Connection conn=sql2o.open())
-//        {
-//            int id=(int)conn.createQuery(saveDepartmentNews)
-//                    .bind(news)
-//                    .executeUpdate()
-//                    .getKey();
-//            news.setId(id);
-//        }catch (Sql2oException ex)
-//        {
-//            System.out.println(ex);
-//        }
-//    }
-
     @Override
     public void saveDepartmentNews(DepartmentNews departmentNews) {
         String saveDepartmentNews="INSERT INTO news (content,type)VALUES(:content,:type)";
         try(Connection conn=sql2o.open()) {
             int id=(int)conn.createQuery(saveDepartmentNews,true)
-                    .bind(departmentNews)
+                    .addParameter("content",departmentNews.getContent())
+                    .addParameter("type",departmentNews.getType())
                     .executeUpdate()
                     .getKey();
             departmentNews.setId(id);
@@ -50,7 +35,8 @@ public class Sql2oNewsDao implements NewsDao{
         String saveGeneralNews="INSERT INTO news (content,type)VALUES(:content,:type)";
         try(Connection conn=sql2o.open()) {
             int id =(int)conn.createQuery(saveGeneralNews,true)
-                    .bind(generalNews)
+                    .addParameter("content",generalNews.getContent())
+                    .addParameter("type",generalNews.getType())
                     .executeUpdate()
                     .getKey();
             generalNews.setId(id);
@@ -79,8 +65,8 @@ public class Sql2oNewsDao implements NewsDao{
     @Override
     public List<DepartmentNews> getDepartmentNews(DepartmentNews departmentNews) {
         try(Connection conn=sql2o.open()) {
-            return conn.createQuery("SELECT * FROM news WHERE id=:departmentNewsId")
-                    .addParameter("departmentNewsId",departmentNews.getId())
+            return conn.createQuery("SELECT * FROM news WHERE type=:type")
+                    .addParameter("type",departmentNews.getType())
                     .executeAndFetch(DepartmentNews.class);
         }
     }
@@ -88,8 +74,8 @@ public class Sql2oNewsDao implements NewsDao{
     @Override
     public List<GeneralNews> getGeneralNews(GeneralNews generalNews) {
         try(Connection conn=sql2o.open()) {
-            return conn.createQuery("SELECT * FROM news WHERE id=:generalNewsId")
-                    .addParameter("generalNewsId",generalNews.getId())
+            return conn.createQuery("SELECT * FROM news WHERE type=:type")
+                    .addParameter("generalNewsId",generalNews.getType())
                     .executeAndFetch(GeneralNews.class);
         }
     }
