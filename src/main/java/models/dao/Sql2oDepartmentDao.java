@@ -35,8 +35,8 @@ public class Sql2oDepartmentDao implements DepartmentDao {
              conn.createQuery(sql)
                     .addParameter("department_id",department.getId())
                     .addParameter("user_id",users.getId())
-                    .addParameter("user_role",department.getUserRole())
-                    .addParameter("user_position",department.getUserPosition())
+                    .addParameter("user_role",users.getUserRole())
+                    .addParameter("user_position",users.getUserPosition())
                     .executeUpdate();
         }catch (Sql2oException ex)
         {
@@ -108,8 +108,12 @@ public class Sql2oDepartmentDao implements DepartmentDao {
     @Override
     public void clearAll() {
         String sql ="DELETE FROM department";
+        String sql1 ="DELETE FROM department_with_user";
         try(Connection conn=sql2o.open()) {
             conn.createQuery(sql)
+                    .executeUpdate();
+
+            conn.createQuery(sql1)
                     .executeUpdate();
         }catch (Sql2oException ex)
         {
