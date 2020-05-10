@@ -8,21 +8,22 @@ import java.util.List;
 
 public interface NewsDao {
 //    CREATE
-    void saveNews(News news);
+//    void saveNews(News news);
     void saveDepartmentNews(DepartmentNews departmentNews);
     void saveGeneralNews(GeneralNews generalNews);
 
 
 //    READ
-    List<News>getAll();
-    List<DepartmentNews> getDepartmentNews(int departmentNewsId);
-    List<GeneralNews>getGeneralNews(int generalNewsId);
+    List<DepartmentNews>getAllDepartmentNews();
+    List<GeneralNews>getAllGeneralNews();
+    List<DepartmentNews> getDepartmentNews(DepartmentNews departmentNews);
+    List<GeneralNews>getGeneralNews(GeneralNews generalNews);
 
 
 //    UPDATE
 
 //    DELETE
     void clearAll();
-    void removeById(int id,int department_id);
+    void removeById(int id);
 
 }

@@ -14,27 +14,27 @@ public class Sql2oNewsDao implements NewsDao{
         this.sql2o = sql2o;
     }
 
-    @Override
-    public void saveNews(News news) {
-        String saveDepartmentNews="INSERT INTO news (content,type)VALUES(:content,:type)";
-        try(Connection conn=sql2o.open())
-        {
-            int id=(int)conn.createQuery(saveDepartmentNews)
-                    .bind(news)
-                    .executeUpdate()
-                    .getKey();
-            news.setId(id);
-        }catch (Sql2oException ex)
-        {
-            System.out.println(ex);
-        }
-    }
+//    @Override
+//    public void saveNews(News news) {
+//        String saveDepartmentNews="INSERT INTO news (content,type)VALUES(:content,:type)";
+//        try(Connection conn=sql2o.open())
+//        {
+//            int id=(int)conn.createQuery(saveDepartmentNews)
+//                    .bind(news)
+//                    .executeUpdate()
+//                    .getKey();
+//            news.setId(id);
+//        }catch (Sql2oException ex)
+//        {
+//            System.out.println(ex);
+//        }
+//    }
 
     @Override
     public void saveDepartmentNews(DepartmentNews departmentNews) {
-        String saveDepartmentNews="INSERT INTO department_with_news (department_id,news_id) VALUES (:department_id,:news_id)";
+        String saveDepartmentNews="INSERT INTO news (content,type)VALUES(:content,:type)";
         try(Connection conn=sql2o.open()) {
-            int id=(int)conn.createQuery(saveDepartmentNews)
+            int id=(int)conn.createQuery(saveDepartmentNews,true)
                     .bind(departmentNews)
                     .executeUpdate()
                     .getKey();
@@ -47,9 +47,9 @@ public class Sql2oNewsDao implements NewsDao{
 
     @Override
     public void saveGeneralNews(GeneralNews generalNews) {
-        String saveGeneralNews="INSERT INTO department_with_news (department_id,news_id) VALUES (:department_id,:news_id)";
+        String saveGeneralNews="INSERT INTO news (content,type)VALUES(:content,:type)";
         try(Connection conn=sql2o.open()) {
-            int id =(int)conn.createQuery(saveGeneralNews)
+            int id =(int)conn.createQuery(saveGeneralNews,true)
                     .bind(generalNews)
                     .executeUpdate()
                     .getKey();
@@ -61,27 +61,35 @@ public class Sql2oNewsDao implements NewsDao{
     }
 
     @Override
-    public List<News> getAll() {
+    public List<DepartmentNews> getAllDepartmentNews() {
         try(Connection conn=sql2o.open()) {
-            return conn.createQuery("SEELECT *FROM department_with_news")
-                    .executeAndFetch(News.class);
-        }
-    }
-
-    @Override
-    public List<DepartmentNews> getDepartmentNews(int departmentNewsId) {
-        try(Connection conn=sql2o.open()) {
-            return conn.createQuery("SELECT * FROM department_with_news WHERE department_id=:departmentNewsId")
-                    .addParameter("departmentNewsId",departmentNewsId)
+            return conn.createQuery("SELECT * FROM news")
                     .executeAndFetch(DepartmentNews.class);
         }
     }
 
     @Override
-    public List<GeneralNews> getGeneralNews(int generalNewsId) {
+    public List<GeneralNews> getAllGeneralNews() {
         try(Connection conn=sql2o.open()) {
-            return conn.createQuery("SELECT * FROM department_with_news WHERE department_id=:generalNewsId")
-                    .addParameter("generalNewsId",generalNewsId)
+            return conn.createQuery("SELECT * FROM news")
+                    .executeAndFetch(GeneralNews.class);
+        }
+    }
+
+    @Override
+    public List<DepartmentNews> getDepartmentNews(DepartmentNews departmentNews) {
+        try(Connection conn=sql2o.open()) {
+            return conn.createQuery("SELECT * FROM news WHERE id=:departmentNewsId")
+                    .addParameter("departmentNewsId",departmentNews.getId())
+                    .executeAndFetch(DepartmentNews.class);
+        }
+    }
+
+    @Override
+    public List<GeneralNews> getGeneralNews(GeneralNews generalNews) {
+        try(Connection conn=sql2o.open()) {
+            return conn.createQuery("SELECT * FROM news WHERE id=:generalNewsId")
+                    .addParameter("generalNewsId",generalNews.getId())
                     .executeAndFetch(GeneralNews.class);
         }
     }
@@ -89,13 +97,13 @@ public class Sql2oNewsDao implements NewsDao{
     @Override
     public void clearAll() {
         String news ="DELETE FROM news";
-        String department_with_news ="DELETE FROM department_with_news";
+//        String department_with_news ="DELETE FROM department_with_news";
         try(Connection conn=sql2o.open()) {
             conn.createQuery(news)
                     .executeUpdate();
 
-            conn.createQuery(department_with_news)
-                    .executeUpdate();
+//            conn.createQuery(department_with_news)
+//                    .executeUpdate();
         }catch (Sql2oException ex)
         {
             System.out.println(ex);
@@ -103,17 +111,17 @@ public class Sql2oNewsDao implements NewsDao{
     }
 
     @Override
-    public void removeById(int id,int department_id) {
+    public void removeById(int id) {
         String sql ="DELETE FROM news WHERE id=:id";
-        String sql1 ="DELETE FROM department_with_news WHERE department_id=:department_id";
+//        String sql1 ="DELETE FROM department_with_news WHERE department_id=:department_id";
         try(Connection conn=sql2o.open()) {
             conn.createQuery(sql)
                     .addParameter("id",id)
                     .executeUpdate();
 
-            conn.createQuery(sql1)
-                    .addParameter("department_id",department_id)
-                    .executeUpdate();
+//            conn.createQuery(sql1)
+//                    .addParameter("department_id",department_id)
+//                    .executeUpdate();
         }catch (Sql2oException ex)
         {
             System.out.println(ex);
