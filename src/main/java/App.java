@@ -157,6 +157,46 @@ public class App {
             }
         });
 
+//        NEWS (GENERAL)
+        post("/news/general-news/new","application/json",(request, response) ->
+        {
+            GeneralNews generalNews=gson.fromJson(request.body(),GeneralNews.class);
+            newsDao.saveGeneralNews(generalNews);
+            response.status(201);
+            return gson.toJson(generalNews);
+        });
+
+        get("/news/general-news/","application.json",(request, response) ->
+        {
+            System.out.println(newsDao.getAllGeneralNews());
+            if (newsDao.getAllGeneralNews().size()>0)
+            {
+                return gson.toJson(newsDao.getAllGeneralNews());
+            }else
+            {
+                return "{\\\"message\\\":\\\"I'm sorry, but no news are currently listed in the database.\\\"}";
+
+            }
+        });
+
+//        get("/news/general-news/:id","application.json",(request, response) ->
+//        {
+//            int newsId=Integer.parseInt(request.params("id"));
+//            GeneralNews generalNews=newsDao.getGeneralNews(newsId);
+//        });
+
+        post("/news/general-news/clear","application/json",(request, response) ->
+        {
+            System.out.println(newsDao.getAllGeneralNews());
+            if (newsDao.getAllGeneralNews().size()>0)
+            {
+                newsDao.clearAll();
+                return gson.toJson(newsDao.getAllGeneralNews());
+            }else
+            {
+                return "{\\\"message\\\":\\\"I'm sorry, but no news are currently listed in the database.\\\"}";
+            }
+        });
 //        FILTERS
         after((req, res) ->{
             res.type("application/json");
