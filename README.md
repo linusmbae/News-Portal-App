@@ -3,6 +3,9 @@
 # Author Name
 Mbae Linus Mutugi
 
+# Description
+The news portal app is intended to be used by an organization to pass their news to the other employees. The news can be either departmental or general news.
+
 # Project Setup
 ### Database Setup
 Click this [link](https://www.postgresql.org/download/) to install postgreSQL if you don't have one.
