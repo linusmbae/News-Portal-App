@@ -65,11 +65,17 @@ make necessary changes to the database links in the test files
  ### new user
  
  > http://localhost:4567/users/new
+
  {
+ 
 "name":"Mbae",
+
 "email":"mbae@gmail.com",
+
 "phone":"0712345678",
+
 "idNumber":"12345"
+
 }
 
 ### get all users
@@ -99,8 +105,11 @@ replace :id with the user id (eg 2)
 > http://localhost:4567/department/new
 
 {
+
 	"name":"Customer Desk",
+	
 	"floor":"Ground"
+	
 }
 
 ### get all departments
@@ -130,8 +139,11 @@ replace :id with the department id (eg 2)
 > http://localhost:4567/news/general-news/new
 
 {
+
 	"content":"Tomorrow is a long holiday",
+	
 	"type":"General News"
+	
 }
 
 ### fetch general news 
@@ -149,8 +161,11 @@ replace :id with the department id (eg 2)
 > http://localhost:4567/news/department-news/new
 
 {
+
 	"content":"public holiday approaching",
+	
 	"type":"Department News"
+	
 }
 
 ## fetch department news
